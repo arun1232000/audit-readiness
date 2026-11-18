@@ -72,12 +72,6 @@ export const brand = {
     callPrefix: 'or call',
   },
 
-  /** Hero: the first question, answerable right on the landing page. */
-  heroCheck: {
-    label: 'Question 1 of 8',
-    hint: 'Tap an answer to begin. Your progress is kept.',
-  },
-
   /** "What we check": the four areas, built from the assessment data. */
   areas: {
     kicker: 'What we check',

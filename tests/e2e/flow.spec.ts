@@ -124,14 +124,3 @@ test('keyboard only: answers and power units with Enter', async ({ page }, info)
   await expect(dialog(page).getByRole('heading', { name: 'Company records and renewals' })).toBeFocused();
 });
 
-test('answering question one in the hero opens the check at question two', async ({ page }) => {
-  await page.goto('/');
-  const card = page.locator('.hero-card');
-  await expect(card.getByRole('heading', { name: 'Safety program and accountability' })).toBeVisible();
-  await card.getByRole('button', { name: 'Partly' }).click();
-  await expect(dialog(page).getByText('Question 2 of 8')).toBeVisible();
-  // Back shows question one with the hero answer kept.
-  await dialog(page).getByRole('button', { name: 'Back' }).click();
-  await expect(dialog(page).getByRole('button', { name: 'Partly', exact: true })).toHaveAttribute('aria-pressed', 'true');
-  await expect(page.locator('.site-header img[alt="Prime Compliance"]')).toBeVisible();
-});

@@ -154,9 +154,9 @@ button { font: inherit; color: inherit; }
               linear-gradient(0deg, var(--bg) 0%, rgba(18, 16, 14, 0) 30%),
               linear-gradient(180deg, rgba(18, 16, 14, .6) 0%, rgba(18, 16, 14, 0) 22%); }
 #road { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; mix-blend-mode: screen; }
-.hero-in { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); gap: var(--s8); align-items: center;
-  padding-top: calc(var(--header-h) + var(--s8)); padding-bottom: var(--s9); }
-.hero h1 { margin-top: var(--s5); font-size: var(--fs-display); line-height: 1; letter-spacing: -.035em; }
+.hero-in { padding-top: calc(var(--header-h) + var(--s8)); padding-bottom: var(--s9); }
+.hero-copy { max-width: 760px; }
+.hero h1 { margin-top: var(--s5); font-size: clamp(48px, 7.4vw, 104px); line-height: 1; letter-spacing: -.035em; }
 .hero h1 .w { display: inline-block; }
 .hero h1 .soft { color: var(--yellow); }
 .hero .lede { margin-top: var(--s5); max-width: 540px; font-size: clamp(18px, 1.5vw, 20px); color: var(--text-2); line-height: 1.6; }
@@ -170,27 +170,8 @@ button { font: inherit; color: inherit; }
 .hero-stats span { font-size: var(--fs-xs); color: var(--muted); }
 .photo-note { position: absolute; right: var(--gutter); bottom: 16px; font-size: 12px; color: rgba(244, 241, 236, .55); }
 
-/* question one, live on the first screen */
-.hero-card { padding: 28px; background: linear-gradient(180deg, rgba(34, 30, 27, .9), rgba(27, 24, 22, .92));
-  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
-.hero-card::before { content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1px; pointer-events: none;
-  background: linear-gradient(140deg, rgba(246, 203, 21, .5), rgba(246, 203, 21, 0) 35%, rgba(246, 203, 21, 0) 70%, rgba(205, 174, 126, .3));
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
-.hc-head { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); }
-.hc-count { font-size: var(--fs-sm); font-weight: 600; }
-.hc-count span { color: var(--muted); font-weight: 400; }
-.hc-segs { display: flex; gap: 4px; width: 132px; }
-.hc-segs i { flex: 1; height: 5px; border-radius: 3px; background: rgba(255, 244, 228, .1); }
-.hc-segs i:first-child { background: rgba(246, 203, 21, .55); }
-.hero-card .qtop { margin-top: var(--s5); }
-.hero-card .qtext { font-size: var(--fs-sm); }
-.hero-card .answers { margin-top: var(--s5); }
-.hero-card .ans { min-height: 56px; font-size: 16px; }
-.hc-hint { margin-top: var(--s4); font-size: var(--fs-xs); color: var(--muted); text-align: center; }
-
 @media (max-width: 1080px) {
-  .hero-in { grid-template-columns: 1fr; gap: var(--s7); padding-top: calc(var(--header-h) + var(--s7)); padding-bottom: var(--s8); }
-  .hero-card { max-width: 640px; }
+  .hero-in { padding-top: calc(var(--header-h) + var(--s7)); padding-bottom: var(--s8); }
 }
 @media (max-width: 560px) {
   .hero h1 { font-size: 46px; }
@@ -200,7 +181,6 @@ button { font: inherit; color: inherit; }
   .ghost-link { justify-content: center; }
   .hero-stats { gap: var(--s5); margin-top: var(--s6); }
   .hero-stats b { font-size: 24px; }
-  .hero-card { padding: 20px; }
 }
 
 /* the strip of papers a file is made of */

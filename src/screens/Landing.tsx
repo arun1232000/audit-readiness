@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { brand } from '../config/brand';
-import { CHOICES, DIMENSIONS, QUESTIONS, type ChoiceId } from '../data/assessment';
-import { ANSWER_ICONS, AREA_ICONS, GapMark, QUESTION_ICONS, STEP_ICONS, Tick } from '../components/icons';
+import { DIMENSIONS, QUESTIONS } from '../data/assessment';
+import { AREA_ICONS, GapMark, STEP_ICONS, Tick } from '../components/icons';
 import { prefersReducedMotion } from '../lib/reducedMotion';
 
 type BandImage = { src: string; srcSet: string; y: string; alt: string; caption: string };
@@ -42,50 +42,7 @@ function FileCard({ id, kind, label, data }: { id: string; kind: 'gaps' | 'good'
   );
 }
 
-/** Question one, live on the first screen: answering it opens the check at question two. */
-function HeroCheck({ onAnswer }: { onAnswer: (c: ChoiceId) => void }) {
-  const q = QUESTIONS[0]!;
-  const dim = DIMENSIONS.find((d) => d.id === q.dimension)!;
-  return (
-    <section className="card hero-card" aria-labelledby="hc-title">
-      <div className="hc-head">
-        <p className="hc-count">
-          Question 1 <span>of {QUESTIONS.length}</span>
-        </p>
-        <span className="hc-segs" aria-hidden="true">
-          {QUESTIONS.map((x) => (
-            <i key={x.id} />
-          ))}
-        </span>
-      </div>
-      <div className="qtop">
-        <div className="qicon" aria-hidden="true">
-          {QUESTION_ICONS[0]}
-        </div>
-        <div>
-          <p className="area">
-            {dim.code} {dim.name}
-          </p>
-          <h2 className="qtitle" id="hc-title">
-            {q.title}
-          </h2>
-        </div>
-      </div>
-      <p className="qtext">{q.text}</p>
-      <div className="answers" role="group" aria-labelledby="hc-title">
-        {CHOICES.map((c) => (
-          <button key={c.id} type="button" className={`ans${c.id === 'notsure' ? '' : ` k-${c.id}`}`} onClick={() => onAnswer(c.id)}>
-            <span className="ai">{ANSWER_ICONS[c.id]}</span>
-            <span>{c.label}</span>
-          </button>
-        ))}
-      </div>
-      <p className="hc-hint">{brand.heroCheck.hint}</p>
-    </section>
-  );
-}
-
-export function Landing({ onOpenAudit, onAnswerFirst }: { onOpenAudit: () => void; onAnswerFirst: (c: ChoiceId) => void }) {
+export function Landing({ onOpenAudit }: { onOpenAudit: () => void }) {
   const root = useRef<HTMLElement>(null);
   const road = useRef<HTMLCanvasElement>(null);
   const stars = useRef<HTMLCanvasElement>(null);
@@ -117,7 +74,7 @@ export function Landing({ onOpenAudit, onAnswerFirst }: { onOpenAudit: () => voi
 
   return (
     <main ref={root} id="main">
-      {/* 1. hero: the pitch, and question one ready to tap */}
+      {/* 1. hero */}
       <section className="hero" aria-labelledby="h1">
         <div className="photo">
           <img src={hero.image.src} srcSet={hero.image.srcSet} sizes="100vw" alt={hero.image.alt} width={1920} height={1275} fetchPriority="high" />
@@ -161,7 +118,6 @@ export function Landing({ onOpenAudit, onAnswerFirst }: { onOpenAudit: () => voi
               </li>
             </ul>
           </div>
-          <HeroCheck onAnswer={onAnswerFirst} />
         </div>
         <p className="photo-note">{hero.caption}</p>
       </section>
