@@ -19,6 +19,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
+    "test:e2e:web3forms": "playwright test -c playwright.web3forms.config.ts",
     "hubspot:setup": "tsx server/scripts/setup-hubspot-properties.ts",
     "queue:flush": "tsx server/scripts/flush-queue.ts"
   },

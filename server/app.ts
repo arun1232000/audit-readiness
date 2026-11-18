@@ -50,7 +50,7 @@ export function createApp(deps: AppDeps) {
           defaultSrc: ["'self'"],
           scriptSrc: ["'self'", 'https://challenges.cloudflare.com'],
           frameSrc: ['https://challenges.cloudflare.com'],
-          connectSrc: ["'self'"],
+          connectSrc: ["'self'", 'https://api.web3forms.com'],
           imgSrc: ["'self'", 'data:'],
           styleSrc: ["'self'", "'unsafe-inline'"],
           fontSrc: ["'self'", 'data:'],

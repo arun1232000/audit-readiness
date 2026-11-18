@@ -1,5 +1,6 @@
 import { brand } from '../config/brand';
 import { asset } from '../lib/paths';
+import { USE_WEB3FORMS } from '../lib/api';
 
 /** Placeholder privacy policy. Replace with your organisation's reviewed policy text. */
 export function PrivacyScreen() {
@@ -18,7 +19,11 @@ export function PrivacyScreen() {
         <h2>What we store</h2>
         <p>Your contact details, your answers and scores, your fleet size, the date you completed the check, your consent, and how you found us (campaign and referring site).</p>
         <h2>Where it is stored</h2>
-        <p>In our customer relationship system (HubSpot). We do not sell your data.</p>
+        <p>
+          {USE_WEB3FORMS
+            ? 'Your details are delivered to our team by email through our form provider (Web3Forms). We do not sell your data.'
+            : 'In our customer relationship system (HubSpot). We do not sell your data.'}
+        </p>
         <h2>Your rights</h2>
         <p>
           You can ask to see, correct or delete your data at any time. Call {brand.phone.label} or write to us via{' '}

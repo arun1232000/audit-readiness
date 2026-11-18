@@ -1,7 +1,8 @@
 name: Deploy to GitHub Pages
 
-# Builds the frontend in demo mode (no server on Pages: submissions are simulated in the browser)
-# and publishes it at https://<owner>.github.io/<repo>/.
+# Builds the frontend and publishes it at https://<owner>.github.io/<repo>/.
+# Leads go to Web3Forms when the repository variable WEB3FORMS_ACCESS_KEY is set
+# (Settings > Secrets and variables > Actions > Variables); without it the site runs as a demo.
 on:
   push:
     branches: [main]
@@ -29,11 +30,12 @@ jobs:
       - run: npm run typecheck
       - run: npm run lint
       - run: npm test
-      - name: Build (demo mode, served under /<repo>/)
+      - name: Build (served under /<repo>/)
         run: npx vite build
         env:
           VITE_BASE: /${{ github.event.repository.name }}/
           VITE_DEMO_MODE: 'true'
+          VITE_WEB3FORMS_ACCESS_KEY: ${{ vars.WEB3FORMS_ACCESS_KEY }}
       - name: SPA fallback for deep links such as /privacy
         run: cp dist/index.html dist/404.html
       - uses: actions/configure-pages@v5

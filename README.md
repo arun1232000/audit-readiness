@@ -135,6 +135,17 @@ The look is Prime's brand: a warm night ground, road yellow as the one bright co
 
 ---
 
+## Web3Forms (simplest: no server, no HubSpot)
+
+Instead of HubSpot, each completed check can be emailed to you through [Web3Forms](https://web3forms.com). The browser posts straight to Web3Forms, so this works on static hosting such as GitHub Pages.
+
+1. Get a free access key at https://web3forms.com (enter the inbox that should receive leads).
+2. Set `VITE_WEB3FORMS_ACCESS_KEY` at build time. On GitHub Pages: repository **Settings > Secrets and variables > Actions > Variables**, add `WEB3FORMS_ACCESS_KEY`, then re-run the Pages workflow.
+
+When the key is set, it takes priority over demo mode and the `/api/submit` server. Each email contains the name, email (set as reply-to), mobile, power units, score and band, per-area scores, all eight answers, the items to review, consent, the source (UTM/referrer) and the submission ID. The score is still shown instantly in the browser; a network failure shows the usual "Try again" screen. Bots that fill the hidden field or finish in under 4 seconds see a normal result and nothing is sent.
+
+The access key is public by design (it can only send a form to your inbox), so it is safe in the bundle. Web3Forms has no CRM, de-duplication or retry queue; use the HubSpot server below if you need those. Test: `npm run test:e2e:web3forms` (Web3Forms is intercepted; nothing is sent).
+
 ## HubSpot setup
 
 ### 1. Create a Private App
