@@ -63,7 +63,6 @@ export const brand = {
   hero: {
     image: { ...img('hero_trans_canada_cochrane'), alt: 'The Trans-Canada Highway near Cochrane, Alberta, running west toward the Rocky Mountains under a soft grey sky.' },
     caption: 'The Trans-Canada Highway near Cochrane, Alberta',
-    kicker: 'The Audit, for owners of 5 to 70 trucks',
     headline: ['Are', 'you', 'audit', 'ready?'],
     lede: 'For fleets in Alberta and the provinces near it. One person in your office, our back office beside them, and your file ready before the letter comes.',
     promise: ['8 taps', '1 minute', 'Your score by area'],

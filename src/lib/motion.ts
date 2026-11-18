@@ -191,7 +191,7 @@ export function initScrollMotion(root: HTMLElement, onEndShown: () => void): Cle
   const mm = gsap.matchMedia();
   const ctx = gsap.context(() => {
     gsap.from('.hero h1 .w', { y: 30, opacity: 0, duration: D, ease: 'power3.out', stagger: 0.09, delay: 0.1 });
-    gsap.from(['.hero .kicker', '.hero .lede', '.hero .hero-cta', '.hero .hero-stats'], { y: 16, opacity: 0, duration: D, ease, stagger: 0.08, delay: 0.35 });
+    gsap.from(['.hero .lede', '.hero .hero-cta', '.hero .hero-stats'], { y: 16, opacity: 0, duration: D, ease, stagger: 0.08, delay: 0.35 });
 
     // Scroll-scrubbed effects only where there is room and power for them.
     mm.add('(min-width: 900px)', () => {

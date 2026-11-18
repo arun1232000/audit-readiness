@@ -82,10 +82,6 @@ export function Landing({ onOpenAudit }: { onOpenAudit: () => void }) {
         <canvas id="road" ref={road} aria-hidden="true" />
         <div className="hero-in wide">
           <div className="hero-copy">
-            <p className="kicker pill">
-              <span className="dot" aria-hidden="true" />
-              {hero.kicker}
-            </p>
             <h1 id="h1">
               {hero.headline.map((w, i) => (
                 <span key={w}>
