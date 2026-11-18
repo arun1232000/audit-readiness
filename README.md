@@ -142,7 +142,7 @@ Instead of HubSpot, each completed check can be emailed to you through [Web3Form
 1. Get a free access key at https://web3forms.com (enter the inbox that should receive leads).
 2. Set `VITE_WEB3FORMS_ACCESS_KEY` at build time. On GitHub Pages: repository **Settings > Secrets and variables > Actions > Variables**, add `WEB3FORMS_ACCESS_KEY`, then re-run the Pages workflow.
 
-When the key is set, it takes priority over demo mode and the `/api/submit` server. Each email contains the name, email (set as reply-to), mobile, power units, score and band, per-area scores, all eight answers, the items to review, consent, the source (UTM/referrer) and the submission ID. The score is still shown instantly in the browser; a network failure shows the usual "Try again" screen. Bots that fill the hidden field or finish in under 4 seconds see a normal result and nothing is sent.
+When the key is set, it takes priority over demo mode and the `/api/submit` server. Each email contains the name, email (set as reply-to), mobile, power units, score and band, per-area scores, all eight answers, the items to review, consent, the source (UTM/referrer) and the submission ID. The score is still shown instantly in the browser; a network failure shows the usual "Try again" screen. Spam filtering is left to Web3Forms (a client-side honeypot can be autofilled by browsers and would silently drop real leads). If a send fails, the browser console says why.
 
 The access key is public by design (it can only send a form to your inbox), so it is safe in the bundle. Web3Forms has no CRM, de-duplication or retry queue; use the HubSpot server below if you need those. Test: `npm run test:e2e:web3forms` (Web3Forms is intercepted; nothing is sent).
 

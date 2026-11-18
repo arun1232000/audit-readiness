@@ -21,7 +21,6 @@ test('the lead is posted to Web3Forms and the scorecard shows', async ({ page })
     await d.getByRole('button', { name: a, exact: true }).click();
   }
   await d.getByRole('button', { name: '5 to 20' }).click();
-  await page.waitForTimeout(4000); // past the too-fast bot check
   await d.getByLabel('Full name').fill('Sam Patel');
   await d.getByRole('textbox', { name: /Mobile/ }).fill('7805551234');
   await d.getByLabel(/^Email/).fill('sam.patel@example.com');

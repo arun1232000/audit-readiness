@@ -9,9 +9,6 @@ import { sendToWeb3Forms, WEB3FORMS_KEY, web3formsPayload } from './web3forms';
 export const USE_WEB3FORMS = WEB3FORMS_KEY !== '';
 export const DEMO_MODE = !USE_WEB3FORMS && import.meta.env.VITE_DEMO_MODE === 'true';
 
-/** Bots that fill the hidden field or finish implausibly fast get a normal-looking success and nothing is sent. */
-const MIN_COMPLETION_MS = 4000;
-
 async function browserSubmit(payload: SubmissionInput, send: boolean, timeoutMs: number, retries: number): Promise<SubmitResponse> {
   const parsed = submissionSchema.safeParse(payload);
   if (!parsed.success) return { ok: false, code: 'validation', message: 'Some of your details need another look.' };
@@ -29,8 +26,8 @@ async function browserSubmit(payload: SubmissionInput, send: boolean, timeoutMs:
     await new Promise((res) => setTimeout(res, 500));
     return success;
   }
-  if (s.website || s.durationMs < MIN_COMPLETION_MS) return success;
-
+  // No silent client-side bot filtering here: browsers can autofill the hidden field, which would drop
+  // a real lead without anyone noticing. Web3Forms filters spam on its side.
   const fields = web3formsPayload(s, r, WEB3FORMS_KEY);
   for (let attempt = 0; ; attempt++) {
     const ctrl = new AbortController();
@@ -38,12 +35,14 @@ async function browserSubmit(payload: SubmissionInput, send: boolean, timeoutMs:
     try {
       const sent = await sendToWeb3Forms(fields, ctrl.signal);
       if (sent.ok) return success;
+      console.warn('Web3Forms rejected the submission:', sent.message ?? 'no message');
       return { ok: false, code: 'server_error', message: 'Something went wrong on our side.' };
-    } catch {
+    } catch (e) {
       if (attempt < retries) {
         await new Promise((res) => setTimeout(res, 800));
         continue;
       }
+      console.warn('Could not reach Web3Forms (blocked by an extension, offline, or a CORS error):', e);
       throw new NetworkError();
     } finally {
       clearTimeout(timer);
