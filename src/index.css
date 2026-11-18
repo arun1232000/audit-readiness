@@ -1,0 +1,4 @@
+/* Tailwind utilities are available for app-specific additions; the page design itself lives in styles/theme.css.
+   Preflight is disabled (tailwind.config.ts) so it never fights the design's own base styles. */
+@tailwind components;
+@tailwind utilities;

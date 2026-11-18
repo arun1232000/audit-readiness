@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2022"],
+    "types": ["node", "vitest/globals"]
+  },
+  "include": ["server", "api", "tests/server", "src/schemas", "src/lib/scoring.ts", "src/data", "src/lib/summary.ts", "src/lib/utm-shared.ts"]
+}
